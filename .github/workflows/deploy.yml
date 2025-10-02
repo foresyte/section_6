@@ -4,8 +4,14 @@ on:
     branches:
       - main
       - dev
+env:
+  MONGODB_DB_NAME: gha-demo
 jobs:
   test:
+    env:
+      MONGODB_CLUSTER_ADDRESS: 
+      MONGODB_USERNAME: 
+      MONGODB_PASSWORD: 
     environment: testing
     runs-on: ubuntu-latest
     steps:
@@ -23,7 +29,7 @@ jobs:
       - name: Run tests
         run: npm test
       - name: Output information
-        run: echo "..."
+        run: echo "MONGODB_DB_NAME ${{ env.MONGODB_DB_NAME }}"
   deploy:
     needs: test
     runs-on: ubuntu-latest
